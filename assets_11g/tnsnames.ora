@@ -4,6 +4,6 @@ orcl=
      (address = (protocol = TCP)(host = %hostname%)(port = 1521))
    )
  (connect_data =
-   (sid=orcl)
+   (sid=ORCL)
  )
 )

@@ -146,7 +146,7 @@ GDBNAME = "orcl.vv10.com"
 # Default value : <db_name> specified in GDBNAME
 # Mandatory     : No
 #-----------------------------------------------------------------------------
-SID = "orcl"
+SID = "ORCL"
 
 #-----------------------------------------------------------------------------
 # Name          : NODELIST

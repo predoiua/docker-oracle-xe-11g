@@ -5,6 +5,17 @@
 ASSET=/assets_11g
 OR=/u01
 
+
+create_user() {
+    groupadd oinstall
+    groupadd dba
+    groupadd oracle
+    useradd -g oinstall -G dba oracle
+    echo "oracle" | passwd oracle --stdin
+}
+
+create_user
+
 export ORACLE_HOME=${OR}/app/oracle/product/11.2.0/db_1
 
 mkdir -p ${ORACLE_HOME}
@@ -12,7 +23,7 @@ chown -R oracle:oinstall ${OR}
 chmod -R 775 ${OR}
 
 export PATH=$ORACLE_HOME/bin:$PATH
-export ORACLE_SID=orcl
+export ORACLE_SID=ORCL
 
 echo "export ORACLE_HOME=${ORACLE_HOME}" >> /etc/bashrc
 echo "export PATH=${ORACLE_HOME}/bin:\$PATH" >> /etc/bashrc
@@ -21,7 +32,7 @@ echo "export ORACLE_SID=${ORACLE_SID}" >> /etc/bashrc
 create_env() {
 
 yum update -y
-yum install -y initscripts # for sudo
+yum install -y initscripts sudo # for service and sudo
 yum install -y xorg-x11-server-Xorg xorg-x11-xauth xorg-x11-apps  # minimal X
 
 # Oracle package
@@ -108,15 +119,8 @@ fi
 
 }
 
-
-create_user() {
-    groupadd oinstall
-    groupadd dba
-    groupadd oracle
-    useradd -g oinstall -G dba oracle
-
-    echo "oracle" | passwd oracle --stdin
-    echo "oracle ALL=(ALL)        NOPASSWD: ALL" | sudo EDITOR='tee -a' visudo
+grant_user() {
+    echo "oracle ALL=(ALL)        NOPASSWD: ALL" | EDITOR='tee -a' visudo
 }
 
 create_ssh() {
@@ -126,13 +130,16 @@ create_ssh() {
 
 
 create_db_sw() {
-    su - oracle -c "${ASSET}/database/runInstaller -silent -responseFile ${ASSET}/db_install.rsp -ignorePrereq -ignoreSysPrereqs"
+    su - oracle -c "${ASSET}/database/runInstaller -silent -waitforcompletion -responseFile ${ASSET}/db_install.rsp -ignorePrereq -ignoreSysPrereqs"
+    /u01/app/oraInventory/orainstRoot.sh
     ${ORACLE_HOME}/root.sh
-    echo "orcl:/u01/app/oracle/product/11.2.0/db_1:Y" >/etc/oratab
+    echo "Done install sw"
 }
 
 create_db() {
     su - oracle -c "dbca -silent -responseFile ${ASSET}/dbca.rsp"
+    echo "ORCL:/u01/app/oracle/product/11.2.0/db_1:Y" >/etc/oratab
+    echo "Done create DB"
 }
 
 
@@ -140,6 +147,7 @@ create_listener() {
     cp ${ASSET}/listener.ora ${ORACLE_HOME}/network/admin/listener.ora.tmpl
     cp ${ASSET}/tnsnames.ora ${ORACLE_HOME}/network/admin/tnsnames.ora.tmpl
     su - oracle -c "netca /silent -responseFile ${ASSET}/netca.rsp"
+    echo "Done listener"
 }
 
 create_service() {
@@ -152,13 +160,15 @@ create_service() {
 
 all() {
     create_env
-    create_user
+    grant_user
+
     create_db_sw
     create_db
     create_listener
-
     create_service
+
     create_ssh
+    echo "Done"
 }
 
 all

@@ -34,7 +34,7 @@ oracle.install.option=INSTALL_DB_SWONLY
 # first hostname found on the system. (e.g., for systems with multiple hostnames 
 # and network interfaces)
 #-------------------------------------------------------------------------------
-ORACLE_HOSTNAME=ora11g
+ORACLE_HOSTNAME=localhost
 
 #-------------------------------------------------------------------------------
 # Specify the Unix group to be set for the inventory directory.  
@@ -149,7 +149,7 @@ oracle.install.db.OPER_GROUP=dba
 #------------------------------------------------------------------------------
 # Specify the cluster node names selected during the installation.
 #------------------------------------------------------------------------------
-oracle.install.db.CLUSTER_NODES=
+#oracle.install.db.CLUSTER_NODES=
 
 #------------------------------------------------------------------------------
 # Specify the type of database to create.
@@ -157,17 +157,17 @@ oracle.install.db.CLUSTER_NODES=
 # - GENERAL_PURPOSE/TRANSACTION_PROCESSING          
 # - DATA_WAREHOUSE                                
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.type=
+oracle.install.db.config.starterdb.type=GENERAL_PURPOSE
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database Global Database Name. 
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.globalDBName=
+oracle.install.db.config.starterdb.globalDBName=ORCL
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database SID.
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.SID=
+oracle.install.db.config.starterdb.SID=ORCL
 
 #------------------------------------------------------------------------------
 # Specify the Starter Database character set.
@@ -197,7 +197,7 @@ oracle.install.db.config.starterdb.memoryOption=true
 # on the system.
 # Example: oracle.install.db.config.starterdb.memoryLimit=512
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.memoryLimit=
+#oracle.install.db.config.starterdb.memoryLimit=
 
 #------------------------------------------------------------------------------
 # This variable controls whether to load Example Schemas onto the starter
@@ -210,7 +210,7 @@ oracle.install.db.config.starterdb.installExampleSchemas=false
 # and revoking some grants to public. These settings are provided by default. 
 # These settings may also be disabled.    
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.enableSecuritySettings=true
+oracle.install.db.config.starterdb.enableSecuritySettings=false
 
 ###############################################################################
 #                                                                             #
@@ -264,7 +264,7 @@ oracle.install.db.config.starterdb.control=DB_CONTROL
 # Specify the Management Service to use if Grid Control is selected to manage 
 # the database.      
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.gridcontrol.gridControlServiceURL=
+#oracle.install.db.config.starterdb.gridcontrol.gridControlServiceURL=
 
 #-------------------------------------------------------------------------------
 # This variable indicates whether to receive email notification for critical 
@@ -275,12 +275,12 @@ oracle.install.db.config.starterdb.dbcontrol.enableEmailNotification=false
 #-------------------------------------------------------------------------------
 # Specify the email address to which the notifications are to be sent.
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.dbcontrol.emailAddress=vv10@vv10.ro
+#oracle.install.db.config.starterdb.dbcontrol.emailAddress=vv10@vv10.ro
 
 #-------------------------------------------------------------------------------
 # Specify the SMTP server used for email notifications.
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.dbcontrol.SMTPServer=
+#oracle.install.db.config.starterdb.dbcontrol.SMTPServer=
 
 
 ###############################################################################
@@ -304,7 +304,7 @@ oracle.install.db.config.starterdb.automatedBackup.enable=false
 # 2:00 AM to backup the database. This job will run as the operating system 
 # user that is specified in this variable.
 #------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.automatedBackup.osuid=
+#oracle.install.db.config.starterdb.automatedBackup.osuid=
 
 #-------------------------------------------------------------------------------
 # Regardless of the type of storage that is chosen for backup and recovery, if 
@@ -313,7 +313,7 @@ oracle.install.db.config.starterdb.automatedBackup.osuid=
 # specified by the above entry. The following entry stores the password for the
 # above operating system user.
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.automatedBackup.ospwd=
+#oracle.install.db.config.starterdb.automatedBackup.ospwd=
 
 #-------------------------------------------------------------------------------
 # Specify the type of storage to use for the database.
@@ -329,42 +329,42 @@ oracle.install.db.config.starterdb.storageType=FILE_SYSTEM_STORAGE
 #
 # Applicable only when oracle.install.db.config.starterdb.storage=FILE_SYSTEM 
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=
+#oracle.install.db.config.starterdb.fileSystemStorage.dataLocation=
 
 #-------------------------------------------------------------------------------
 # Specify the backup and recovery location.
 #
 # Applicable only when oracle.install.db.config.starterdb.storage=FILE_SYSTEM 
 #-------------------------------------------------------------------------------
-oracle.install.db.config.starterdb.fileSystemStorage.recoveryLocation=
+#oracle.install.db.config.starterdb.fileSystemStorage.recoveryLocation=
 
 #-------------------------------------------------------------------------------
 # Specify the existing ASM disk groups to be used for storage.
 #
 # Applicable only when oracle.install.db.config.starterdb.storage=ASM
 #-------------------------------------------------------------------------------
-oracle.install.db.config.asm.diskGroup=dba
+#oracle.install.db.config.asm.diskGroup=dba
 
 #-------------------------------------------------------------------------------
 # Specify the password for ASMSNMP user of the ASM instance.                  
 #
 # Applicable only when oracle.install.db.config.starterdb.storage=ASM_SYSTEM 
 #-------------------------------------------------------------------------------
-oracle.install.db.config.asm.ASMSNMPPassword=oracle
+#oracle.install.db.config.asm.ASMSNMPPassword=oracle
 
 #------------------------------------------------------------------------------
 # Specify the My Oracle Support Account Username.
 #
 #  Example   : MYORACLESUPPORT_USERNAME=metalink
 #------------------------------------------------------------------------------
-MYORACLESUPPORT_USERNAME=
+#MYORACLESUPPORT_USERNAME=
 
 #------------------------------------------------------------------------------
 # Specify the My Oracle Support Account Username password.
 #
 # Example    : MYORACLESUPPORT_PASSWORD=password
 #------------------------------------------------------------------------------
-MYORACLESUPPORT_PASSWORD=
+#MYORACLESUPPORT_PASSWORD=
 
 #------------------------------------------------------------------------------
 # Specify whether to enable the user to set the password for
@@ -373,7 +373,7 @@ MYORACLESUPPORT_PASSWORD=
 #
 # Example    : SECURITY_UPDATES_VIA_MYORACLESUPPORT=true
 #------------------------------------------------------------------------------
-SECURITY_UPDATES_VIA_MYORACLESUPPORT=
+SECURITY_UPDATES_VIA_MYORACLESUPPORT=false
 
 #------------------------------------------------------------------------------
 # Specify whether user wants to give any proxy details for connection. 
@@ -389,14 +389,14 @@ DECLINE_SECURITY_UPDATES=true
 #
 # Example    : PROXY_HOST=proxy.domain.com 
 #------------------------------------------------------------------------------
-PROXY_HOST=
+#PROXY_HOST=
 
 #------------------------------------------------------------------------------
 # Specify the proxy port number. Should be Numeric and atleast 2 chars.
 #
 # Example    : PROXY_PORT=25 
 #------------------------------------------------------------------------------
-PROXY_PORT=
+#PROXY_PORT=
 
 #------------------------------------------------------------------------------
 # Specify the proxy user name. Leave PROXY_USER and PROXY_PWD 
@@ -404,7 +404,7 @@ PROXY_PORT=
 #
 # Example    : PROXY_USER=username 
 #------------------------------------------------------------------------------
-PROXY_USER=
+#PROXY_USER=
 
 #------------------------------------------------------------------------------
 # Specify the proxy password. Leave PROXY_USER and PROXY_PWD  
@@ -412,4 +412,4 @@ PROXY_USER=
 #
 # Example    : PROXY_PWD=password 
 #------------------------------------------------------------------------------
-PROXY_PWD=
+#PROXY_PWD=

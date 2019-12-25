@@ -28,7 +28,7 @@ if [ "$ORACLE_DISABLE_ASYNCH_IO" = true ]; then
   echo "ALTER SYSTEM SET disk_asynch_io = FALSE SCOPE = SPFILE;" | sqlplus -s SYSTEM/oracle
   service oracle restart
 fi
-echo "Custom init:"
+echo "Execute sustom init script"
 for f in /docker-entrypoint-initdb.d/*; do
   [ -f "$f" ] || continue
   case "$f" in
