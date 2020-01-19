@@ -98,3 +98,17 @@ ADD init.sql /docker-entrypoint-initdb.d/
 ADD script.sh /docker-entrypoint-initdb.d/
 ```
 Running order is alphabetically. 
+
+
+~~~
+docker build -t vv10/oracle-11g .
+docker run -d -p 1521:1521 -p 2222:22 vv10/oracle-11g
+docker run -d -p 1521:1521 vv10/oracle-11g
+
+docker run -d -p 1521:1521 -v /home/predoiua/test/sql:/docker-entrypoint-initdb.d/:Z vv10/oracle-11g
+
+
+docker run -it --rm -v /home/predoiua/test/sql:/docker-entrypoint-initdb.d/:Z vv10/oracle-11g /usr/sbin/startup.sh
+
+
+~~~

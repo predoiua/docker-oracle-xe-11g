@@ -1,7 +1,7 @@
-FROM centos:6.10
+FROM ubuntu:18.04
 
-COPY assets_11g /assets_11g
-RUN /assets_11g/setup_docker.sh
+COPY assets /assets
+RUN /assets/setup.sh
 
 EXPOSE 22
 EXPOSE 1521
